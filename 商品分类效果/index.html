@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+	*{padding: 0;margin: 0;}
+	li{list-style: none;}
+	a{color:#333;}
+	.container{width: 600px;margin: 0 auto;}
+	.condition{overflow: hidden;height: 40px;background-color:skyblue;}
+	.condition p{float: left;width: 100px;}
+	.condition ul{float: left;}
+	.condition li{float: left;margin-right: 10px;}
+	.demo li{overflow: hidden;margin-bottom: 20px;}
+	.demo span{float: left;width: 100px;}
+	.demo a{float: left;margin-right: 10px;}
+	#shopList li{padding:10px;border: 1px solid #ccc;float: left;margin: 0 10px 10px 0;}
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="condition">
+			<p>你的选择</p>
+			<ul id="condition">
+
+			</ul>
+	</div>
+	<div class="demo">
+		<ul id="type">
+				<!-- <li>
+					<span>品牌1</span>
+					<a href="">苹果1</a>
+				</li> -->
+		</ul>
+	</div>
+	<a href="javascript:;" id="priceSort">按价格排序</a>
+	<ul id="shopList">
+		<!-- <li>
+			<p>手机品牌：小米</p>
+			<p>手机系统：and</p>
+			<p>手机屏幕大小：4.0.1</p>
+		</li> -->
+	</ul>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery-1.8.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script>
+var shopsList=[
+	{
+		'name':'小米',
+		'sysem':'and',
+		'size':'4.0.1',
+		"price":1200
+	},
+	{
+
+		'name':'小米',
+		'sysem':'and',
+		'size':'4.0.3',
+		"price":1100
+	},
+	{
+		'name':'中兴',
+		'sysem':'and',
+		'size':'4.0.2',
+		"price":1200
+	},
+	{
+		'name':'华为',
+		'sysem':'and',
+		'size':'4.0.3',
+		"price":1300
+	},
+	{
+		'name':'苹果',
+		'sysem':'ios',
+		'size':'4.0.4',
+		"price":1400
+	},
+	{
+		'name':'三星',
+		'sysem':'and',
+		'size':'4.0.0',
+		"price":1000
+	},
+]
+var curbData=[
+	{
+		"title":"品牌",
+		"data":["小米","中兴","华为","三星","苹果",]
+	},
+	{
+		"title":"系统",
+		"data":["and","ios"]
+	},
+	{
+		"title":"屏幕尺寸",
+		"data":["4.0.0","4.0.1","4.0.2","4.0.3","4.0.4"]
+	},
+	{
+		"title":"价格",
+		"data":["1000","1200","1300","1400","1500"]
+	}
+
+];
+var _this;
+var goodsList={
+	curbDataLen:curbData.length,
+	chooseObj:{},
+	filterObj:{},
+	filterChoose:['name','sysem','size','price'],
+	filterArr:[],
+	init:function  () {
+		_this=this;
+		_this.eventAction();
+		_this.render.initNoFilter();
+
+	},
+	eventAction:function  () {
+
+		$("#type").append(_this.render.curbDataHtml());
+		$(".choose").on('click',function  () {
+			_this.event.typeChange.call(this);
+			_this.event.chooseChange.call(this);
+
+		});
+		$("#priceSort").on("click",function  () {
+			_this.filterArr=_.sortBy(_this.filterArr,function  (item) {
+				return item.price;
+			});
+			_this.render.filterComFn();
+		})
+
+	},
+	event:{
+		typeChange:function  (that) {
+			$(this).parent('li').find('a').siblings('a').css('color', '#333');
+			$(this).css('color', 'red');
+		},
+		chooseChange:function  (that) {
+			var chooseParent=$(this).parent('li');
+			_this.chooseObj[chooseParent.index()]=$(this).text();
+			_this.filterObj[_this.filterChoose[chooseParent.index()]]=$(this).text();
+			$("#condition").html(_this.render.createChoseHtml());
+			/*console.log(_this.chooseObj)*/
+
+			_this.render.filterHtml();
+			/*console.log(_this.filterObj)*/
+			$(".del").on("click",function  () {
+				$(this).parent("li").remove();
+				var delIndex=Number($(this).data("index"));
+				var filterIndex=$(this).data("filter");
+				delete _this.chooseObj[delIndex];
+				delete _this.filterObj[filterIndex];
+				_this.render.filterHtml();
+				$("#type li").eq(delIndex).children('a').css('color', '#333');
+				/*console.log(_this.chooseObj)*/
+
+			});
+
+		}
+	},
+	render:{
+		curbDataHtml:function  () {
+			var html=[];
+			for (var i = 0; i < _this.curbDataLen; i++) {
+
+				html.push('<li>');
+				html.push('<span>'+curbData[i].title+'</span>');
+				curbData[i].data.forEach(function  (item) {
+					html.push('<a href="javascript:;" class="choose">'+item+'</a>')
+				});
+				html.push('</li>');
+			};
+
+			return html.join("");
+		},
+		createChoseHtml:function  () {
+			var html="";
+			for (var i = 0; i < _this.curbDataLen; i++) {
+				if (_this.chooseObj[i]) {
+					html+='<li>'+_this.chooseObj[i]+'<a href="javascript:;" class="del" data-index=" '+i+'" data-filter="'+_this.filterChoose[i]+'">x</a></li>'
+				};
+
+			};
+			return html;
+		},
+		initNoFilter:function  () {
+			_this.filterArr=shopsList;
+			_this.render.filterComFn()
+		},
+		filterHtml:function  () {
+			_this.filterArr=shopsList;
+			for (var attr in _this.filterObj) {
+				_this.filterArr=_this.filterArr.filter(function  (obj) {
+					console.log( _this.filterObj[attr])
+					return obj[attr]== _this.filterObj[attr];
+				})
+			};
+			_this.render.filterComFn()
+
+
+		},
+		filterComFn:function  () {
+			var html='';
+			$.each(_this.filterArr,function(key, value) {
+				html+='<li><p>'+value.name+'</p><p>'+value.sysem+'</p><p>'+value.size+'</p><p>'+value.price+'元</p></li>';
+			});
+			$("#shopList").html(html);
+		}
+	}
+}
+goodsList.init();
+</script>
+</body>
+</html>

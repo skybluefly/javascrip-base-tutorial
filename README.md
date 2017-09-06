@@ -1,2 +1,2 @@
-# javascrip-base-tutorial
-javascript 基础教程练习
+# 记录学习javascript相关知识
+
