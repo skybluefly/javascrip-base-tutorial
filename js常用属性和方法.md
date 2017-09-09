@@ -2,7 +2,7 @@
 
 ----------
 
-避免自己总是会忘记或则混淆一些函数~
+避免自己总是会忘记或者混淆一些函数~
 
 - 全局函数  
 encodeURI,encodeURIComponent,decondeURI,eval,Sring,
