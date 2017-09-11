@@ -24,7 +24,7 @@ instanceof：** instanceof (Object,Function,Number...) [true,false]
 原型：
 Object.prototype.toString.call(**) [object Array] [object Array] [object String] [object Undefined] ........
 - 事件相关(eg:e.stopPropagation())  
-stopPropagation,preventDefault
+stopPropagation,preventDefault，attachEvent，addEventListener
 
 
 
