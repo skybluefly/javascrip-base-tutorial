@@ -25,9 +25,9 @@ instanceof：** instanceof (Object,Function,Number...) [true,false]
 Object.prototype.toString.call(**) [object Array] [object Array] [object String] [object Undefined] ........
 - 事件相关(eg:e.stopPropagation())  
 stopPropagation,preventDefault，attachEvent，addEventListener
-- 选择器：
+- 选择器：  
 querySelector,querySelectorAll,getElementByClassName,getElementById,getElementByTagName,
-- 操作节点：
+- 操作节点： 
 appendChild,inserBefore,replaceChild,removeChild,cloneNode
 
 
