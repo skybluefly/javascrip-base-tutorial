@@ -15,9 +15,9 @@ parse,stringify, toJSON（obj.toJSON）
 mix,max,random,floor,ceil,abs,round,
 - 字符串：(eg:str.charAt())  
 charAt,substr,subtring,slice,split,indexOf,trim,math,replace,toUpperCase,toLowerCase,toString,toFixed
-- underscore：(eg:_.each())  
-each,map,find,filter,max,min,sortBy,groupBy,first,last,indexOf,lastIndexOf,
-- 判断类型：  
+- underscore：(eg:_.each())    
+each,map,find,filter,max,min,sortBy,groupBy,first,last,indexOf,lastIndexOf,without,union,pick,omit,has
+- 判断类型：  
 typeof：   
 typeof **  [number,boolean,object,undefined,funciton,string]  
 instanceof：** instanceof (Object,Function,Number...) [true,false]  
