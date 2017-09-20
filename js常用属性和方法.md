@@ -27,7 +27,7 @@ Object.prototype.toString.call(**) [object Array] [object Array] [object String]
 stopPropagation,preventDefault，attachEvent，addEventListener
 - 选择器：  
 querySelector,querySelectorAll,getElementByClassName,getElementById,getElementByTagName,
-- 操作节点： 
+- 操作节点：    
 appendChild,inserBefore,replaceChild,removeChild,cloneNode
 
 
