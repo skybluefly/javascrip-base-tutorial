@@ -16,7 +16,7 @@ mix,max,random,floor,ceil,abs,round,
 - 字符串：(eg:str.charAt())  
 charAt,substr,subtring,slice,split,indexOf,trim,math,replace,toUpperCase,toLowerCase,toString,toFixed
 - underscore：(eg:_.each())    
-each,map,find,filter,reject,max,min,sortBy,groupBy,first,last,indexOf,lastIndexOf,without,union,pick,omit,has,key,value,chain,contains
+each,map,find,filter,reject,max,min,sortBy,groupBy,first,last,indexOf,lastIndexOf,without,union,pick,omit,has,key,value,chain,contains,pluck,countBy,shuffle,sample,toArray
 - 判断类型：  
 typeof：   
 typeof **  [number,boolean,object,undefined,funciton,string]  
@@ -29,6 +29,3 @@ stopPropagation,preventDefault，attachEvent，addEventListener
 querySelector,querySelectorAll,getElementByClassName,getElementById,getElementByTagName,
 - 操作节点：    
 appendChild,inserBefore,replaceChild,removeChild,cloneNode
-
-
-
