@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script>
+    function sum (x,y,z) {
+    	let total=0;
+    	if (x) total+=x;
+    	if (y) total+=y;
+    	if (z) total+=z;
+    	console.log(`total:${total}`)
+
+    }
+    sum(1,2,3);
+    function sum2 (...m) {
+    	let total=0;
+    	for(var i of m){
+    		total+=i;
+    	}
+    	console.log(`total:${total}`)
+    }
+    sum2(1,2,3);
+    let sum3=(...m)=>{
+    	let total=0;
+    	for(var i of m){
+    		total+=i;
+    	}
+    	console.log(`total:${total}`)
+    }
+    sum3(1,2,3);
+    </script>
+</body>
+</html>
