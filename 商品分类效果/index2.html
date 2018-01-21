@@ -118,70 +118,36 @@ var goodsList={
 	filterArr:[],
 	init:function  () {
 		_this=this;
-		_this.render.curbDataHtml();
-		_this.eventAction();
+
 		_this.render.initNoFilter();
+		_this.event.action();
 
-	},
-	eventAction:function  () {
-
-
-		$(".choose").on('click',function  () {
-			_this.event.typeChange.call(this);
-			_this.event.chooseChange.call(this);
-
-		});
-		$("#priceSort").on("click",function  () {
-			_this.filterArr=_.sortBy(_this.filterArr,function  (item) {
-				return item.price;
-			});
-			_this.render.filterComFn();
-		})
-
-	},
-	event:{
-		typeChange:function  (that) {
-			$(this).parent('li').find('a').siblings('a').css('color', '#333');
-			$(this).css('color', 'red');
-		},
-		chooseChange:function  (that) {
-			var chooseParent=$(this).parent('li');
-			_this.chooseObj[chooseParent.index()]=$(this).text();
-			_this.filterObj[_this.filterChoose[chooseParent.index()]]=$(this).text();
-			$("#condition").html(_this.render.createChoseHtml());
-			/*console.log(_this.chooseObj)*/
-
-			_this.render.filterHtml();
-			console.log(_this.filterObj)
-			$(".del").on("click",function  () {
-				$(this).parent("li").remove();
-				var delIndex=Number($(this).data("index"));
-				var filterIndex=$(this).data("filter");
-				delete _this.chooseObj[delIndex];
-				delete _this.filterObj[filterIndex];
-				_this.render.filterHtml();
-				$("#type li").eq(delIndex).children('a').css('color', '#333');
-				/*console.log(_this.chooseObj)*/
-
-			});
-
-		}
 	},
 	render:{
-		curbDataHtml:function  () {
+		initNoFilter:function  () {
+			_this.filterArr=shopsList;
+			_this.render.titleHtml();
+			_this.render.productHtml()
+		},
+		titleHtml:function  () {
 			var _tpl=[
 				'{{#.}}<li>',
 					'<span>{{title}}</span>',
 					'{{#data}}<a href="javascript:;" class="choose">{{.}}</a>{{/data}}',
 				'</li>{{/.}}'
 			].join('');
-			 var html = Mustache.render(_tpl, curbData);
-
-
-			 $("#type").append(html);
+			var html=Mustache.render(_tpl,curbData)
+			$("#type").append(html);
+		},
+		productHtml:function  () {
+			var html='';
+			$.each(_this.filterArr,function(key, value) {
+				html+='<li><p>'+value.name+'</p><p>'+value.sysem+'</p><p>'+value.size+'</p><p>'+value.price+'元</p></li>';
+			});
+			$("#shopList").html(html);
 
 		},
-		createChoseHtml:function  () {
+		choseHtml:function  () {
 			var html="";
 			for (var i = 0; i < _this.curbDataLen; i++) {
 				if (_this.chooseObj[i]) {
@@ -189,32 +155,29 @@ var goodsList={
 				};
 
 			};
-			return html;
-		},
-		initNoFilter:function  () {
-			_this.filterArr=shopsList;
-			_this.render.filterComFn()
+			$("#condition").html(html);
 		},
 		filterHtml:function  () {
-			_this.filterArr=shopsList;
-			for (var attr in _this.filterObj) {
+			for ( var attr in _this.filterObj){
 				_this.filterArr=_this.filterArr.filter(function  (obj) {
-					console.log( obj)
-					return obj[attr]== _this.filterObj[attr];
+					return obj[attr]==_this.filterObj[attr]
 				})
-			};
-			_this.render.filterComFn()
-
-
-		},
-		filterComFn:function  () {
-			var html='';
-			$.each(_this.filterArr,function(key, value) {
-				html+='<li><p>'+value.name+'</p><p>'+value.sysem+'</p><p>'+value.size+'</p><p>'+value.price+'元</p></li>';
+			}
+			_this.render.productHtml()
+		}
+	},
+	event:{
+		action:function  () {
+			$(".choose").click(function() {
+				var filterIndex=$(this).parent('li').index();
+				_this.chooseObj[filterIndex]=$(this).text();
+				_this.filterObj[_this.filterChoose[filterIndex]]=$(this).text();
+				_this.render.choseHtml()
+				_this.render.filterHtml()
 			});
-			$("#shopList").html(html);
 		}
 	}
+
 }
 goodsList.init();
 </script>
