@@ -7,13 +7,11 @@ function filterChapters (html) {
 	var $=cheerio.load(html)
 	var chapters=$(".chapter")
 	var title=$(".course-infos .path span").text()
-	var number=$($('.static-item')[0]).find('meta-value').text()
-	console.log(number)
+	var number=$($('.static-item')[1]).find('.meta-value').text()
 	var courseData={
 		title:title,
 		videos:[],
-		number:number,
-		videos:[]
+		number:number
 	}
 
 	chapters.each(function(item) {

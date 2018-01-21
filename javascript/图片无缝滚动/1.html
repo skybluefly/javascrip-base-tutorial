@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>slider</title>
+    <link rel="stylesheet" href="slider.css">
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <a href="javascript:;" class="goLeft">向左走</a>
+    <a href="javascript:;" class="goRight">向右走</a>
+    <div class="wrap">
+        <ul>
+            <li><img src="1.jpg" alt=""></li>
+            <li><img src="2.jpg" alt=""></li>
+            <li><img src="3.jpg" alt=""></li>
+            <li><img src="4.jpg" alt=""></li>
+            <li><img src="5.jpg" alt=""></li>
+        </ul>
+    </div>
+    <script>
+    var Slider = function() {
+        Slider.prototype.init.apply(this, arguments);
+    };
+    option = {
+        targetObj: null,
+        timeId: null,
+        speed: 2,
+
+    }
+    Slider.prototype = {
+        init: function(opts) {
+            var _this = this;
+            _this.opts = $.extend({}, option, opts);
+            _this.render()
+            _this.opts.timeId = setInterval(function() {
+                _this.setAction.move.call(_this)
+            }, 30);
+
+
+            _this.opts.targetObj.hover(function() {
+                clearInterval(_this.opts.timeId);
+            }, function() {
+                _this.opts.timeId = setInterval(function() {
+                    _this.setAction.move.call(_this)
+                }, 30);
+            });
+
+
+            $('.goLeft').click(function() {
+                _this.opts.speed = -2;
+            });
+
+            $('.goRight').click(function() {
+                _this.opts.speed = 2;
+            });
+
+
+        },
+        render: function() {
+            this.oul = this.opts.targetObj.find('ul');
+
+
+            var oulHtml = this.oul.html();
+            this.oul.html(oulHtml + oulHtml);
+
+            var oli = this.oul.find('li');
+            this.aliWidth = oli.eq(0).width();
+            this.aliSize = oli.length;
+
+            this.ulWidth = this.aliWidth * this.aliSize;
+            this.oul.width(this.ulWidth)
+        },
+        setAction: {
+            move: function() {
+
+                var _this = this;
+                if (_this.opts.speed < 0) {
+                    if (this.oul.css('left') == -_this.ulWidth / 2 + 'px') {
+                        this.oul.css('left', 0);
+                    }
+                    this.oul.css('left', '+=-2px');
+                }
+
+
+                if (_this.opts.speed > 0) {
+
+                    if (this.oul.css('left') == '0px') {
+                        this.oul.css('left', -_this.ulWidth / 2 + 'px');
+                    }
+
+                    this.oul.css('left', '+=' + _this.opts.speed + 'px');
+                }
+            }
+        }
+
+    }
+    var slider = new Slider({
+        targetObj: $('.wrap')
+    })
+    </script>
+</body>
+
+</html>

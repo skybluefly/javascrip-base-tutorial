@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-ch">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1" />
+     <link rel="stylesheet" href="http://static.huizecdn.com/css/hz/com/activities-3.0.0.css">
+     <style>
+     .drag{position: absolute;}
+     h3{background-color: #ccc;text-align: center;font-size: 30px	;line-height: 35px;}
+     </style>
+</head>
+<body>
+<button>按钮</button>
+<button>按钮</button>
+<button>按钮</button>
+<!-- <div class="drag">
+		<h3>标题<a ="close" href="javascript:;">x</a></h3>
+</div>
+ -->
+
+<script>
+window.onload=function  () {
+	var oBn=document.getElementsByTagName("button");
+	oBn[0].onclick=function (){
+		var d1=new Drag();
+		d1.init({
+			iNow:1,
+			w:400
+		})
+	}
+	oBn[1].onclick=function (){
+		var d1=new Drag();
+		d1.init({
+			iNow:2,
+			w:600
+		})
+	}
+	oBn[2].onclick=function (){
+		var d1=new Drag();
+		d1.init({
+			w:800
+		})
+	}
+}
+
+function Drag () {
+	this.drag=null;
+	this.settings={
+		w:300,
+		h:300
+	}
+}
+Drag.prototype.json={}
+Drag.prototype.init=function  (opt) {
+	extend(this.settings,opt);
+	if (this.json[opt.iNow]==undefined) {
+		this.json[opt.iNow]=true;
+	};
+	if (this.json[opt.iNow]) {
+		this.setDate();
+		this.fnClose();
+		this.json[opt.iNow]=false;
+	};
+
+
+}
+
+Drag.prototype.setDate=function  () {
+	this.drag=document.createElement("div");
+	this.drag.className="drag";
+	this.drag.innerHTML='<h3>标题<a id="close" href="javascript:;">x</a></h3>'
+	document.body.appendChild(this.drag);
+	this.drag.style.width=this.settings.w+"px";
+	this.drag.style.height=this.settings.h+"px";
+	this.drag.style.left=(winWd ()- this.drag.offsetWidth)/2+"px"
+	this.drag.style.top=(winHg ()- this.drag.offsetHeight)/2+"px"
+}
+Drag.prototype.fnClose=function  () {
+	var oClose=document.getElementById("close");
+	var This=this;
+	oClose.onclick=function  () {
+		document.body.removeChild( This.drag);
+		This.json[opt.iNow]=true
+	}
+}
+function extend(obj1,obj2){
+	for(var attr in obj2){
+		obj1[attr] = obj2[attr];
+	}
+}
+
+function winWd () {
+	return document.documentElement.clientWidth;
+}
+function winHg () {
+	return document.documentElement.clientHeight;
+}
+</script>
+</body>
+</html>
+
