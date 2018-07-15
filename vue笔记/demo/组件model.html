@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+	 <aa class="abc" v-model="test" ></aa>
+      {{'外面的值：' + test}}
+    <button @click="fn">
+      外面改变里面
+    </button>
+</div>
+
+<script>
+	var aa = Vue.extend({
+            template: `<div>
+				    <ul>
+				      <li>{{'里面的值：'+ msg}}</li>
+				      <button @click="fn2">里面改变外面</button>
+				    </ul>
+				  </div>`,
+			            model: {    // 使用model， 这儿2个属性，prop属性说，我要将msg作为该组件被使用时（此处为aa组件被父组件调用）v-model能取到的值，event说，我emit ‘cc’ 的时候，参数的值就是父组件v-model收到的值。
+			      prop: 'msg',
+			      event: 'cc'
+			    },
+			    props: {
+			      msg: ''
+			    },
+			    methods: {
+			      fn2 () {
+			        this.$emit('cc', this.msg+2)
+			      }
+			    }
+        })
+	new Vue({
+		 el: '#app',
+		 data () {
+		      return {
+		        test: '232'
+		      }
+		    },
+		    methods: {
+		      fn () {
+		        this.test += 1
+		      }
+		    },
+		    components:{
+		      aa
+    }
+	})
+</script>
+</body>
+</html>

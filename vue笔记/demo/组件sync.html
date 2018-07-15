@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+	<child1 :word.sync="wrd" ></child1>
+	{{wrd}}
+</div>
+
+<script>
+	var child1 = Vue.extend({
+            template: `<div><input type="checkbox" id="runoob" value="Runoob" v-model="checkedNames">
+				  <label for="runoob">Runoob</label>
+				  <input type="checkbox" id="google" value="Google" v-model="checkedNames">
+				  <label for="google">Google</label>
+				  <input type="checkbox" id="taobao" value="Taobao" v-model="checkedNames">
+				  <label for="taobao">taobao</label></div>`,
+            data() {
+		    return {
+		      checkedNames: [],
+		    }
+		  },
+		  props: {
+		    word: {
+		    	type:Array,
+		    	defalut:[]
+		    }
+		  },
+		  watch: {
+		    checkedNames: function(newValue, oldValue) {
+		      this.$emit('update:word', newValue)
+		    }
+		  }
+        })
+	new Vue({
+		 el: '#app',
+		 data() {
+		    return {
+		      wrd: []
+		    }
+		  },
+		  components: {
+		    child1
+		  }
+	})
+</script>
+</body>
+</html>
