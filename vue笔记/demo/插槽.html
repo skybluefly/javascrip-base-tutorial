@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+</head>
+
+<body>
+<div id="app-6">
+  <component-6>
+    <li slot="item" slot-scope="{text,id}">
+      {{ id+"、"+text }}
+    </li>
+  </component-6>
+</div>
+    <script>
+   new Vue({
+    el: '#app-6',
+    components: {
+        "component-6":{
+            data:function(){
+                return {
+                    items: [
+                        {id:1,text:"哪都通快递"},
+                        {id:2,text:"龙虎山天师府"},
+                        {id:3,text:"曜星社"}
+                    ]
+                }
+            },
+            template: '\
+            <ul>\
+                <slot name="item" v-for="item in items" v-bind:text="item.text" v-bind:id="item.id"></slot>\
+            </ul>'
+        }
+    }
+})
+    </script>
+</body>
+
+</html>
