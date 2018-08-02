@@ -27,18 +27,18 @@
 				      <button @click="fn2">里面改变外面</button>
 				    </ul>
 				  </div>`,
-        model: { // 使用model， 这儿2个属性，prop属性说，我要将msg作为该组件被使用时（此处为aa组件被父组件调用）v-model能取到的值，event说，我emit ‘cc’ 的时候，参数的值就是父组件v-model收到的值。
-            prop: 'msg',
-            event: 'cc'
-        },
+
         props: {
-            msg: ''
-        },
-        methods: {
-            fn2() {
-                this.$emit('cc', this.msg + 2)
-            }
-        }
+	      value: { // 必须要使用value
+	　　　　　default: '',
+	　　　　},
+	    },
+
+	    methods: {
+	      fn2 () {
+	        this.$emit('input', this.value+2) // 这儿必须用input 发送数据，发送的数据会被父级v-model=“test”接受到，再被value=test传回来。
+	      }
+	    }
     })
     new Vue({
         el: '#app',
