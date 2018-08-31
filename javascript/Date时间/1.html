@@ -6,9 +6,19 @@
 <title>找出一周开始的第一天</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <link href="" rel="stylesheet">
 </head>
+<style>
+	ul{overflow: hidden;}
+	li{list-style: none;float: left;border: 1px solid #eee;margin-right: 20px;}
+</style>
 <body>
+<ul>
+
+</ul>
+<button id="lastWeek">上一周</button>
+<button id="nextWeek">下一周</button>
     <script>
    	var _this
    	var week =function  () {
@@ -16,11 +26,54 @@
 
    	}
    	week.prototype = {
-   		init:function  (otp) {
+   		init:function  (opt) {
    			_this = this
+   			_this.now =opt.now
+   			_this.render(_this.now)
+   			_this.eventAction()
    		},
+   		render:function  (date) {
+   			_this.first_day = _this.weekSetDate(date,date.getDay()*-1)
+   			_this.currentFirstDate = new Date(_this.first_day);
+   			console.log(date)
+   			_this.week = []
+   			for (var i = 0; i < 7; i++) {
+   				_this.week.push(_this.formatDate(i==0? _this.first_day : _this.weekSetDate(_this.first_day,1)))
+   			};
+   			var html = ''
+   			_this.week.forEach(v=>{
+   				html+= `<li>${v}</li>`
+   			})
+   			$('ul').html(html)
+
+   		},
+   		weekSetDate:function  (date,n) {
+   			date.setDate(date.getDate()+n)
+   			return date
+   		},
+   		formatDate:function (date){
+                      var year = date.getFullYear()+'年';
+                      var month = (date.getMonth()+1)+'月';
+                      var day = date.getDate()+'日';
+                      var week = '('+['星期天','星期一','星期二','星期三','星期四','星期五','星期六'][date.getDay()]+')';
+
+                      return year+month+day+' '+week;
+                 },
+                 eventAction:function  () {
+                 	$('#lastWeek').click(function() {
+                 		var lastFirstDay = _this.weekSetDate(_this.currentFirstDate,-7)
+   				_this.render(lastFirstDay)
+   			});
+                 	$('#nextWeek').click(function() {
+                 		var nextFirstDay = _this.weekSetDate(_this.currentFirstDate,7)
+   				_this.render(nextFirstDay)
+   			});
+                 }
 
    	}
+   	new week({
+   		now:new Date()
+   	})
     </script>
 </body>
 </html>
