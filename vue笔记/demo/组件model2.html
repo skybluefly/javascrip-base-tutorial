@@ -25,7 +25,7 @@
 				  <label for="taobao">taobao</label></div>`,
             data() {
 		    return {
-		      checkedNames: this.value
+		      checkedNames: (typeof this.value) === 'Object' ? JSON.parse(JSON.stringify(this.value)) : this.value
 		    }
 		  },
 		  model:{
