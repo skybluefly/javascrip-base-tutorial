@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>数组去重</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+    // 1、斐波那契数列
+    //1,1,2,3,5,8,13,21
+    // function aaa(n){
+    // 	if(n<=2){
+    // 		return 1;
+    // 	}
+    // 	return aaa(n-1)+aaa(n-2)
+    // }
+    // console.log(aaa(6))
+    // 2/冒泡排序
+    // function bbb(arr){
+    // 	for (var i = 0; i < arr.length; i++) {
+    // 		for (var j = 0; j < arr.length-i; j++) {
+    // 			toCon(j,j+1)
+    // 		};
+    // 	};
+    // 	function toCon(prev,next){
+    // 		var tmp = ''
+    // 		if(arr[prev]>arr[next]){
+    // 			tmp =arr[prev]
+    // 			arr[prev]=arr[next]
+    // 			arr[next]=tmp
+    // 		}
+    // 	}
+    // 	return arr
+    // }
+    // console.log(bbb([1,8,3,2,7]))
+
+
+    // function ccc(arr){
+    // 	if(arr.length==1){
+    // 		return arr;
+    // 	}
+    // 	var iMin=arr[0]
+    // 	var iIndex = 0
+    // 	for (var i = 0; i < arr.length; i++) {
+    // 		if(arr[i]<iMin){
+    // 			iMin = arr[i]
+    // 			iIndex = i
+    // 		}
+    // 	};
+    // 	var prev=arr.splice(iIndex,1)
+    // 	return prev.concat(ccc(arr))
+    // }
+    // console.log(ccc([1,8,3,2,7]))
+    //3/数组去重
+    var arr = [1, 2, 3, 4, 4]
+
+
+
+
+
+
+    var arr5 = [1, 2, 3, 4, ]
+    var arr6 = [1, 2, 4, 6]
+
+    function unique3(array,array2){
+    return [...array,...array2].filter(function(v, i, arr) {
+
+        return arr.indexOf(v) === arr.lastIndexOf(v);
+
+    });
+
+}
+    console.log(unique3(arr5,arr6))
+    </script>
+</body>
+
+</html>

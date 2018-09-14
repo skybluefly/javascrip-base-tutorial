@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>数组去重</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+<script>
+var  arr=[1,2,3,4,4]
+ function unique(arr) {
+        var arr2 = [arr[0]]
+        for (var i = 1; i < arr.length; i++) {
+            if (con(arr[i])) {
+                arr2.push(arr[i])
+            }
+        };
+
+        function con(num) {
+            for (var j = 0; j < arr2.length; j++) {
+                if (arr2[j] == num) {
+                    return false
+                }
+
+
+            };
+            return true
+        }
+        return arr2
+    }
+    function unique2(arr){
+    	var obj = {}
+    	var arr2=[]
+    	for (var i = 0; i < arr.length; i++) {
+    		if(!obj[arr[i]]){
+    			arr2.push(arr[i])
+    			obj[arr[i]] =1
+    		}
+    		arr[i]
+    	};
+    	return arr2
+    }
+	console.log([...new Set(arr)])
+    console.log(unique(arr))
+    console.log(unique2(arr))
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>filter</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script>
+    var arr=['a','b','c','d','e']
+    var arr1=arr.filter(item=>{
+    	return item.indexOf('a')==-1
+    })
+    console.log(arr1)
+
+    var arr3 = ['a','b','c','d','f']
+    var arr4=arr.filter(item=>{
+    	return arr3.indexOf(item)!=-1
+    })
+    console.log(arr4)
+    </script>
+</body>
+</html>

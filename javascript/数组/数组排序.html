@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>数组去重</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+<script>
+var arr1 = [
+	{
+		'text':'1',
+		'value':1
+	},
+	{
+		'text':'4',
+		'value':4
+	},
+	{
+		'text':'2',
+		'value':2
+	},
+	{
+		'text':'3',
+		'value':3
+	},
+]
+var arr2 = [
+	{
+		'text':'1',
+		'value':1
+	},
+	{
+		'text':'4',
+		'value':4
+	},
+	{
+		'text':'2',
+		'value':2
+	},
+	{
+		'text':'5',
+		'value':5
+	},
+]
+function aaa (arr) {
+	if(arr.length==1){
+		return arr
+	}
+	var min = arr[0].value
+	var index= 0
+
+	for (var i = 0; i < arr.length; i++) {
+		if(arr[i].value<min){
+			min = arr[i].value
+			index= i
+		}
+	};
+	var prev = arr.splice(index,1)
+
+	console.log(aaa(arr))
+	return [...prev,...aaa(arr)]
+	//return a
+}
+function bbb(arr1,arr2){
+	var arr3=[]
+	for (var i = 0; i < arr1.length; i++) {
+		for (var j = 0; j < arr2.length; j++) {
+			if(arr1[i].value==arr2[j].value){
+				arr3.push(arr1[i])
+			}
+		};
+	};
+	return arr3
+}
+
+// console.log(aaa(arr1))
+console.log(bbb(arr1,arr2))
+</script>
+</body>
+</html>

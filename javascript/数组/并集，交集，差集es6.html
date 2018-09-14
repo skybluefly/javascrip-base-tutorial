@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>数组去重</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+<script>
+var a = [1, 2, 3],b = [2, 4, 5];
+// 并集
+let union = a.concat(b.filter(v => !a.includes(v))) // [1,2,3,4,5]
+// 交集
+let intersection = a.filter(v => b.includes(v)) // [2]
+// 差集
+var newArr = a.concat(b)
+let difference1 = newArr.filter(v => a.includes(v) && !b.includes(v)) // [1,3]
+let difference2 = newArr.filter(v => b.includes(v) && !a.includes(v)) // [4,5]
+// 补集
+
+
+console.log(union)
+console.log(intersection)
+console.log(difference1)
+console.log([...difference1,...difference2])
+</script>
+</body>
+</html>
