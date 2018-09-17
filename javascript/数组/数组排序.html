@@ -61,24 +61,10 @@ function aaa (arr) {
 	};
 	var prev = arr.splice(index,1)
 
-	console.log(aaa(arr))
 	return [...prev,...aaa(arr)]
-	//return a
-}
-function bbb(arr1,arr2){
-	var arr3=[]
-	for (var i = 0; i < arr1.length; i++) {
-		for (var j = 0; j < arr2.length; j++) {
-			if(arr1[i].value==arr2[j].value){
-				arr3.push(arr1[i])
-			}
-		};
-	};
-	return arr3
 }
 
-// console.log(aaa(arr1))
-console.log(bbb(arr1,arr2))
+ console.log(aaa(arr1))
 </script>
 </body>
 </html>
