@@ -20,6 +20,14 @@
 <button id="lastWeek">上一周</button>
 <button id="nextWeek">下一周</button>
     <script>
+    let now = new Date();
+    now.setDate(0)
+    console.log(now)
+        // Y = now.getFullYear(),
+        // M = now.getMonth(),
+        // D =now.getDate(),
+        // lastDay = new Date(Y, M, 0).getDate();
+        console.log()
    	var _this
    	var week =function  () {
    		week.prototype.init.apply(this,arguments)

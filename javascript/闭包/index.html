@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>闭包</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+    <script>
+    // for (var i = 0; i < 5; i++) {
+    // 	setTimeout(function  () {
+    // 		console.log(i)
+    // 	},1000)
+    // };
+    //1输出5，0，1，2，3，4
+    //2输出0，1，2，3，4 三种方式
+    var out = function (i){
+    	setTimeout(function  () {
+    		console.log(i)
+    	},1000)
+    }
+    for (var i = 0; i < 5; i++) {
+    	out(i)
+    };
+    </script>
+</body>
+</html>
