@@ -43,7 +43,7 @@
    		render:function  (date) {
    			_this.first_day = _this.weekSetDate(date,date.getDay()*-1)
    			_this.currentFirstDate = new Date(_this.first_day);
-   			console.log(date)
+   			console.log(_this.first_day)
    			_this.week = []
    			for (var i = 0; i < 7; i++) {
    				_this.week.push(_this.formatDate(i==0? _this.first_day : _this.weekSetDate(_this.first_day,1)))
