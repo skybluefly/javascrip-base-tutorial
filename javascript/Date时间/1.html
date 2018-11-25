@@ -20,6 +20,14 @@
 <button id="lastWeek">上一周</button>
 <button id="nextWeek">下一周</button>
     <script>
+    let now = new Date();
+    now.setDate(0)
+    console.log(now)
+        // Y = now.getFullYear(),
+        // M = now.getMonth(),
+        // D =now.getDate(),
+        // lastDay = new Date(Y, M, 0).getDate();
+        console.log()
    	var _this
    	var week =function  () {
    		week.prototype.init.apply(this,arguments)
@@ -35,7 +43,7 @@
    		render:function  (date) {
    			_this.first_day = _this.weekSetDate(date,date.getDay()*-1)
    			_this.currentFirstDate = new Date(_this.first_day);
-   			console.log(date)
+   			console.log(_this.first_day)
    			_this.week = []
    			for (var i = 0; i < 7; i++) {
    				_this.week.push(_this.formatDate(i==0? _this.first_day : _this.weekSetDate(_this.first_day,1)))

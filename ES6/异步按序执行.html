@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script src="Promise.js"></script>
+</head>
+<body>
+<script >
+	// 异步函数a
+	var a = function () {
+	  return new Promise(function (resolve, reject) {
+	    setTimeout(function () {
+	      resolve('a')
+	    }, 1000)
+	  })
+	}
+
+	// 异步函数b
+	var b = function (data) {
+	  return new Promise(function (resolve, reject) {
+	    resolve(data + 'b')
+	  })
+	}
+
+	// 异步函数c
+	var c = function (data) {
+	  return new Promise(function (resolve, reject) {
+	    setTimeout(function () {
+	      resolve(data + 'c')
+	    }, 500)
+	  })
+	}
+	//链式调用
+	a()
+	  .then(function (data) {
+	    return b(data)
+	  })
+	  .then(function (data) {
+	    return c(data)
+	  })
+	  .then(function (data) {
+	    console.log(data)// abc
+	  })
+
+	// 构建队列
+	function queue(arr) {
+	  var sequence = Promise.resolve()
+	  arr.forEach(function (item) {
+	    sequence = sequence.then(item)
+	  })
+	  return sequence
+	}
+
+	// 执行队列
+	queue([a, b, c])
+	  .then(data => {
+	    console.log(data)// abc
+	  })
+
+	async function queue(arr) {
+	  let res = null
+	  for (let promise of arr) {
+	    res = await promise(res)
+	  }
+	  return await res
+	}
+	queue([a, b, c])
+	  .then(data => {
+	    console.log(data)// abc
+	  })
+
+
+</script>
+</body>
+</html>
