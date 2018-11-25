@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+<script>
+	//1.简单链式
+	function Super (){}
+	function Sub () {}
+	Sub.prototype = new Super()
+	//原型式
+	function beget (obj) {
+		var F = function  () {
+
+		}
+		F.prototype = obj
+		return new F()
+	}
+	function Super (argument) {
+
+	}
+	var sup = new Super()
+	var sub = beget(sup)
+	//构造函数
+	function Super () {
+		// body...
+	}
+	function sub () {
+		Super.call(this)
+	}
+	//组合继承
+	function Super () {
+		// body...
+	}
+	function sub () {
+		Super.call(this)
+	}
+	sub.prototype = new Super()
+	//寄生组合
+	function beget(obj){   // 生孩子函数 beget：龙beget龙，凤beget凤。
+	    var F = function(){};
+	    F.prototype = obj;
+	    return new F();
+	}
+	function Super(){}
+	function Sub(){ Super.call(this);   // 核心}
+	var proto = beget(Super.prototype); // 核心
+	proto.constructor = Sub;            // 核心
+	Sub.prototype = proto;
+</script>
+</body>
+</html>

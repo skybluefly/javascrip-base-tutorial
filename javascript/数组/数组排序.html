@@ -28,24 +28,6 @@ var arr1 = [
 		'value':3
 	},
 ]
-var arr2 = [
-	{
-		'text':'1',
-		'value':1
-	},
-	{
-		'text':'4',
-		'value':4
-	},
-	{
-		'text':'2',
-		'value':2
-	},
-	{
-		'text':'5',
-		'value':5
-	},
-]
 function aaa (arr) {
 	if(arr.length==1){
 		return arr
@@ -53,7 +35,7 @@ function aaa (arr) {
 	var min = arr[0].value
 	var index= 0
 
-	for (var i = 0; i < arr.length; i++) {
+	for (var i = 1; i < arr.length; i++) {
 		if(arr[i].value<min){
 			min = arr[i].value
 			index= i
@@ -61,24 +43,12 @@ function aaa (arr) {
 	};
 	var prev = arr.splice(index,1)
 
-	console.log(aaa(arr))
+	//console.log(aaa(arr))
 	return [...prev,...aaa(arr)]
-	//return a
-}
-function bbb(arr1,arr2){
-	var arr3=[]
-	for (var i = 0; i < arr1.length; i++) {
-		for (var j = 0; j < arr2.length; j++) {
-			if(arr1[i].value==arr2[j].value){
-				arr3.push(arr1[i])
-			}
-		};
-	};
-	return arr3
 }
 
-// console.log(aaa(arr1))
-console.log(bbb(arr1,arr2))
+ console.log(aaa(arr1))
+
 </script>
 </body>
 </html>
